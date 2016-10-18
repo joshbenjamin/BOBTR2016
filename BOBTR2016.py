@@ -1,30 +1,25 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, json, request
 
 app = Flask(__name__)
 
-
-@app.route('/')
-def redirect():
-    return redirect('localhost:5000/Welcome')
+@app.route('/')                           #Just reroutes the default address to the welcome page
+def index():
+    return redirect(url_for('welcome'))
 
 @app.route('/Welcome')
-def hello_world():
-    #options = ['<a href="/first">First<a>', '<a href="/second">Second<a>', '<a href="/third">Third<a>']
-    options = ["Sex", "Class", "Age"]
+def welcome():
+    options = ["Sex", "Class", "Age"]  # Options for data to be viewed
     return render_template('welcome.html', options=options)
-    #return 'Hello World! Go to <a href="/yes">Click here<a>'
 
-@app.route('/yes')
-def nextpage():
-    return "You are here"
-
-
-#@app.route('/data/Sex')
-#@app.route('/data/Class')
-#@app.route('/data/Age')
 @app.route('/data/<category>')
 def front(category):
-    return 'To go back, simply <a href="/Welcome">Click Here<a>'
+    total = 0
+    count = 0
+
+    #name = request.json['name']
+
+
+    return render_template('data.html', category=category)
 
 
 if __name__ == '__main__':
