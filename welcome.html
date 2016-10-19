@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<title>Business Optics Internship 2016</title>
+<h1>Welcome to the Titanic Data Analysis System</h1>
+<h3>Please select which set of data you would like to view mortality rates for:</h3>
+{% for item in options %}
+    <li><a href="/data/{{ item }}">{{ item }}</a></li>
+{% endfor %}
