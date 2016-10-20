@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<title>Data Analysis</title>
+<h1>Analysis of Data by Category</h1>
+<h3>Category: {{ category }} </h3>
+
+<head>
+<style>
+table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
+<table style="width:100%">
+  <tr>
+    <th></th>
+    <th>0-10 Years</th>
+    <th>11-20 Years</th>
+    <th>21-30 Years</th>
+    <th>31-40 Years</th>
+    <th>41-50 Years</th>
+    <th>51-60 Years</th>
+    <th>61-70 Years</th>
+    <th>71-80 Years</th>
+    <th>Unknown Years</th>
+  </tr>
+  <tr>
+    <td><b>Number of Passengers on Board</b></td>
+    {% for key in age_groups %}
+        <td>{{ age_groups[key] }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td><b>Number of Survivors</b></td>
+    {% for key in survived_ages %}
+        <td>{{ survived_ages[key] }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td><b>Percentage of Passengers to Survive</b></td>
+    {% for key in percentage_ages %}
+        <td>{{ percentage_ages[key] }}%</td>
+    {% endfor %}
+  </tr>
+</table>
+</body>
+<br>
+To go back, simply <a href="/Welcome">Click Here</a>

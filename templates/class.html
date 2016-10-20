@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<title>Data Analysis</title>
+<h1>Analysis of Data by Category</h1>
+<h3>Category: {{ category }} </h3>
+
+<head>
+<style>
+table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
+<table style="width:100%">
+  <tr>
+    <th></th>
+    <th>Class 1</th>
+    <th>Class 2</th>
+    <th>Class 3</th>
+  </tr>
+  <tr>
+    <td><b>Number of Passengers on Board</b></td>
+    {% for key in class_groups %}
+        <td>{{ class_groups[key] }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td><b>Number of Survivors</b></td>
+    {% for key in class_survived %}
+        <td>{{ class_survived[key] }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td><b>Percentage of Passengers to Survive</b></td>
+    {% for key in class_percentage %}
+        <td>{{ class_percentage[key] }}%</td>
+    {% endfor %}
+  </tr>
+</table>
+</body>
+<br>
+To go back, simply <a href="/Welcome">Click Here</a>
