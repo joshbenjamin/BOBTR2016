@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, json, request
+from flask import Flask, redirect, url_for, render_template, json
 import requests
 
 app = Flask(__name__)
@@ -14,22 +14,22 @@ def welcome():
     options = ["Sex", "Class", "Age", "Embarkation Port"]     # Options for data to be viewed
     return render_template('welcome.html', options=options)
 
-@app.route('/data/<category>', methods=['GET', 'POST'])
-def data(category):
+@app.route('/data/<category>', methods=['GET', 'POST'])       # This will identify the category by the one the user chooses.
+def data(category):                                           # The data manipulation then operates dependant on this choice.
     request_info = requests.get(url)
-    text_representation = request_info.text
+    text_representation = request_info.text                   # Gets the JSON data from http://titanic.businessoptics.biz/survival/ and stores it locally
     data = json.loads(text_representation)
 
     num_entries = len(data)
 
     if category == 'Sex':
-        num_males = 0
+        num_males = 0                                         # Creates each necessary variable
         num_females = 0
         survived_males = 0
         survived_females = 0
 
-        for i in range(0, num_entries):
-            if(data[i]['sex'] == "male"):
+        for i in range(0, num_entries):                       # Looping through data to find the required
+            if(data[i]['sex'] == "male"):                     # information for the category
                 num_males+=1
                 if(data[i]['survived'] == "1"):
                     survived_males+=1
@@ -40,18 +40,18 @@ def data(category):
 
         survived_all = survived_males + survived_females
 
-        percentage_males = int(100 * (float(survived_males) / float(num_males)))
+        percentage_males = int(100 * (float(survived_males) / float(num_males)))        # Gets percentages for the data
         percentage_females = int(100 * (float(survived_females) / float(num_females)))
         percentage_all = int(100 * (float(survived_all) / float(num_entries)))
 
         values = [num_males, num_females, num_entries, survived_males, survived_females,
-                  (survived_males + survived_females), percentage_males, percentage_females, percentage_all]
+                  (survived_males + survived_females), percentage_males, percentage_females, percentage_all] #Used to pass to the html file
 
-        return render_template('sex.html', category=category, values=values)
+        return render_template('sex.html', category=category, values=values)      # Returns using the html file relating to this category
 
 
     elif category == 'Age':
-        age_groups = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 'unknown': 0}
+        age_groups = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 'unknown': 0}      # Using dictionaries to store the different variables
         survived_ages = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 'unknown': 0}
         percentage_ages = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 'unknown': 0}
 
@@ -87,12 +87,6 @@ def data(category):
         for key in range (1, 4):
             class_percentage[key] = int(100 * (float(class_survived[key]) / float(class_groups[key])))
 
-        print str(class_groups)
-        print str(class_survived)
-        print str(class_percentage)
-
-
-        #return "Success"
 
         return render_template("class.html", category=category, class_groups=class_groups, class_survived=class_survived, class_percentage=class_percentage)
 
@@ -107,7 +101,7 @@ def data(category):
             if current_embark == "":
                 current_embark = "Unknown"
 
-            if current_embark not in ports:
+            if current_embark not in ports:                 # Dynamically adding keys to a dictionary
                 ports[current_embark] = 0
                 ports_survived[current_embark] = 0
                 ports_percentage[current_embark] = 0
@@ -123,5 +117,5 @@ def data(category):
 
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=1234, debug=True)
+if __name__ == '__main__':                  # Runs as the main program file
+    app.run(host='0.0.0.0', port=1234)      # Sets the port as such for the localhost
