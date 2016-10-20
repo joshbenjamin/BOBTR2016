@@ -1,6 +1,6 @@
-Welcome to the Business Optics Data Anaalysis System
+Welcome to the Business Optics Data Analysis System
 
-To get strated, simply follow the steps below:
+To get started, simply follow the steps below:
 
 1. Download the zip file for the BOBTR2016 repository (https://github.com/joshbenjamin/BOBTR2016).
 
@@ -8,7 +8,7 @@ To get strated, simply follow the steps below:
 
 *
 
-3a. Either open the python file BOBTR2016.py in your IDE of choice.
+3a. Either open the python file 'BOBTR2016.py' in your IDE of choice.
     or
 3b. Run the file through the terminal.
 
@@ -28,4 +28,4 @@ To get strated, simply follow the steps below:
 
     Navigate to the Python directory on the PC through the terminal.
     Assuming pip is installed, enter the command 'pip install requests'.
-    Close the terminal once it has finished installing and continue with the steps above.
+    Close the terminal once it has finished installing and continue with the     steps above.
